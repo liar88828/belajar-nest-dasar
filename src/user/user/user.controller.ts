@@ -1,15 +1,38 @@
-import { Controller, Get, Header, HttpCode, Param, Post, Query, Redirect } from "@nestjs/common";
-import { Request } from "express";
+import { Controller, Get, Header, HttpCode, Param, Post, Query, Redirect, Req, Res } from "@nestjs/common";
+import { Request, Response } from "express";
 
 // untuk mengubah route
 @Controller("api/users")
 export class UserController {
 
-  @Get('Hola')
-  async getHola(): Promise<string> {
-    return 'Hola'
+  @Get("/view/hello")
+  viewHello(
+    @Query("name") name: string,
+    @Res() response: Response) {
+    response.render("index.html", {
+      title: "Template Engine",
+      name: name
+    });
+
   }
 
+  @Get("/get-cookie")
+  getCookie(@Req() request: Request): string {
+    return request.cookies.name;
+  }
+
+  @Get("/set-cookie")
+  setCookie(
+    @Query("name") name: string,
+    @Res() response: Response) {
+    response.cookie("name", name);
+    response.status(200).send("Set Cookie");
+  }
+
+  @Get("Hola")
+  async getHola(): Promise<string> {
+    return "Hola";
+  }
 
   @Get("sample-response")
   @Header("Content-Type", "application/json")
