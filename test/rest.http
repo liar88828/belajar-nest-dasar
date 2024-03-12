@@ -1,1 +1,12 @@
 GET localhost:3000/api/users/sample
+####
+GET localhost:3000/api/users/eko
+###
+####
+GET localhost:3000/api/users/hello?name=eko
+####
+GET localhost:3000/api/users/hello?first_name=eko&last_name=kanedy
+####
+GET localhost:3000/api/users/sample-response
+####
+GET localhost:3000/api/users/redirect
