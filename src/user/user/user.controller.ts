@@ -1,9 +1,34 @@
-import { Controller, Get, Header, HttpCode, Param, Post, Query, Redirect, Req, Res } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Header,
+  HttpCode,
+  Inject,
+  Optional,
+  Param,
+  Post,
+  Query,
+  Redirect,
+  Req,
+  Res
+} from "@nestjs/common";
 import { Request, Response } from "express";
+import { UserService } from "./user.service";
 
 // untuk mengubah route
 @Controller("api/users")
 export class UserController {
+  constructor(private service: UserService) {}
+  // tidak rekomendasi
+  // @Inject()
+  // @Optional()
+  // private service: UserService
+  @Get("/sayHello2")
+  async sayHello2(
+    @Query("name") name: string
+  ): Promise<string> {
+    return this.service.sayHello(name);
+  }
 
   @Get("/view/hello")
   viewHello(
