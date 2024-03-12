@@ -63,10 +63,10 @@ export class UserController {
 
   // di sarankan
   @Get("/hello")
-  sayHello(
-    @Query("first_name") firstName: Request,
-    @Query("last_name") lastName: Request
-  ): string {
+  async sayHello(
+    @Query("first_name") firstName: string,
+    @Query("last_name") lastName: string
+  ): Promise<string> {
     return `Hello ${firstName} and ${lastName}`;
   }
 
