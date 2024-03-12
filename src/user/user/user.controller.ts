@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { UserService } from "./user.service";
 import { Connection } from "../connection/connection";
 import { MailService } from "../mail/mail.service";
+import { UserRepository } from "../user-repository/user-repository";
 
 // untuk mengubah route
 @Controller("api/users")
@@ -10,7 +11,8 @@ export class UserController {
   constructor(
     private service: UserService,
     private connection: Connection,
-    private mailService: MailService
+    private mailService: MailService,
+    private userRepository:UserRepository
   ) {
   }
 
@@ -19,14 +21,13 @@ export class UserController {
   // @Optional()
   // private service: UserService
 
-  @Get("/mail")
-  async getMail() {
-      this.mailService.send();
-      return 'Send mail'
-  }
+
+
 
   @Get("/connection")
   async getConnection(): Promise<string> {
+    this.mailService.send();
+    this.userRepository.save();
     return this.connection.getName();
   }
 
