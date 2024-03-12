@@ -5,6 +5,12 @@ import { Request } from "express";
 @Controller("api/users")
 export class UserController {
 
+  @Get('Hola')
+  async getHola(): Promise<string> {
+    return 'Hola'
+  }
+
+
   @Get("sample-response")
   @Header("Content-Type", "application/json")
   @HttpCode(200)
