@@ -20,7 +20,8 @@ async function bootstrap() {
 
   app.useGlobalFilters(new ValidationFilter());
   // app.useGlobalPipes() # hati-hati value tipe data
-// app.useGlobalInterceptors( )# hati hati return tipe data
+  // app.useGlobalInterceptors( )# hati hati return tipe data
+  // app.useGlobalGuards() # hati hati tidak semua role sama
   const configService = app.get(ConfigService);
   // add .env
   await app.listen(configService.get("PORT"));
