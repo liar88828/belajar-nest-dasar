@@ -54,3 +54,7 @@ Content-Type: application/json
   "username": "Eko",
   "password": "Kurniawan"
 }
+
+####
+GET localhost:3000/api/users/current
+x-username:1

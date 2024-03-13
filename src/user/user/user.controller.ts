@@ -28,6 +28,7 @@ import { ValidationFilter } from "../../validation/validation.filter";
 import { LoginModel, loginUserRequestValidation } from "../../model/login.model";
 import { ValidationPipe } from "../../validation/validation.pipe";
 import { TimeInterceptor } from "../../time/time.interceptor";
+import { Auth } from "../../auth/auth.decorator";
 
 // untuk mengubah route
 @Controller("api/users")
@@ -41,6 +42,13 @@ export class UserController {
     private memberService: MemberService
   ) {
   }
+
+
+  @Get("/current")
+  async current(@Auth() user: User): Promise<Record<string, any>> {
+    return { data: `Hello ${user.first_name} and ${user.last_name}` };
+  }
+
 
   @UseFilters(ValidationFilter)
   @UsePipes(new ValidationPipe(loginUserRequestValidation))
