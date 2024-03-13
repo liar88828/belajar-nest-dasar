@@ -12,7 +12,8 @@ import {
   Query,
   Redirect,
   Req,
-  Res
+  Res,
+  UseFilters
 } from "@nestjs/common";
 import { Request, Response } from "express";
 import { UserService } from "./user.service";
@@ -21,6 +22,9 @@ import { MailService } from "../mail/mail.service";
 import { UserRepository } from "../user-repository/user-repository";
 import { MemberService } from "../member/member.service";
 import { User } from "@prisma/client";
+import { ValidationFilter } from "../../validation/validation.filter";
+import { LoginModel, loginUserRequestValidation } from "../../model/login.model";
+import { ValidationPipe } from "../../validation/validation.pipe";
 
 // untuk mengubah route
 @Controller("api/users")
@@ -35,6 +39,13 @@ export class UserController {
   ) {
   }
 
+
+  @UseFilters(ValidationFilter)
+  @Post("/login")
+  @Header("Content-Type", "application/json")
+  async login(@Body(new ValidationPipe(loginUserRequestValidation)) request: LoginModel) {
+    return `Hello ${request.username}`;
+  }
 
   @Post("/create")
   @Header("Content-Type", "application/json")

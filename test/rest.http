@@ -1,19 +1,27 @@
 GET localhost:3000/api/users/sample
+
 ####
 GET localhost:3000/api/users/eko
+
 ###
 ####
 GET localhost:3000/api/users/hello?name=eko
+
 ####
 GET localhost:3000/api/users/hello?first_name=eko&last_name=kanedy
+
 ####
 GET localhost:3000/api/users/sample-response
+
 ####
 GET localhost:3000/api/users/redirect
+
 ####
 GET localhost:3000/api/users/hola
+
 ####
 GET localhost:3000/api/users/connection
+
 ####
 GET localhost:3000/api/users/sayHello2?name=1
 
@@ -37,3 +45,12 @@ content-type:application/json
 
 ####
 GET localhost:3000/api/users/123123
+
+####
+POST localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+  "username": "",
+  "password": ""
+}
