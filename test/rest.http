@@ -19,6 +19,6 @@ POST localhost:3000/api/users/create
 content-type:application/json
 
 {
-  "firstName": "alif",
-  "lastName": "Hermawan"
+  "firstName": "budi",
+  "lastName": "prayetno"
 }
