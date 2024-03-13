@@ -19,8 +19,8 @@ async function bootstrap() {
   app.engine("html", mustache());
 
   app.useGlobalFilters(new ValidationFilter());
-  // app.useGlobalPipes() # hati-hati
-
+  // app.useGlobalPipes() # hati-hati value tipe data
+// app.useGlobalInterceptors( )# hati hati return tipe data
   const configService = app.get(ConfigService);
   // add .env
   await app.listen(configService.get("PORT"));
