@@ -14,6 +14,7 @@ import {
   Req,
   Res,
   UseFilters,
+  UseGuards,
   UseInterceptors,
   UsePipes
 } from "@nestjs/common";
@@ -29,6 +30,7 @@ import { LoginModel, loginUserRequestValidation } from "../../model/login.model"
 import { ValidationPipe } from "../../validation/validation.pipe";
 import { TimeInterceptor } from "../../time/time.interceptor";
 import { Auth } from "../../auth/auth.decorator";
+import { RoleGuard } from "../../role/role.guard";
 
 // untuk mengubah route
 @Controller("api/users")
@@ -45,6 +47,7 @@ export class UserController {
 
 
   @Get("/current")
+  @UseGuards(new RoleGuard(["admin", "operator"]))
   async current(@Auth() user: User): Promise<Record<string, any>> {
     return { data: `Hello ${user.first_name} and ${user.last_name}` };
   }
