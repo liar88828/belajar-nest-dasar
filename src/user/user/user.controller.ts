@@ -14,6 +14,7 @@ import {
   Req,
   Res,
   UseFilters,
+  UseInterceptors,
   UsePipes
 } from "@nestjs/common";
 import { Request, Response } from "express";
@@ -26,6 +27,7 @@ import { User } from "@prisma/client";
 import { ValidationFilter } from "../../validation/validation.filter";
 import { LoginModel, loginUserRequestValidation } from "../../model/login.model";
 import { ValidationPipe } from "../../validation/validation.pipe";
+import { TimeInterceptor } from "../../time/time.interceptor";
 
 // untuk mengubah route
 @Controller("api/users")
@@ -43,11 +45,14 @@ export class UserController {
   @UseFilters(ValidationFilter)
   @UsePipes(new ValidationPipe(loginUserRequestValidation))
   @Post("/login")
+  @UseInterceptors(TimeInterceptor)
   @Header("Content-Type", "application/json")
   async login(
     @Query("name") name: string,
     @Body() request: LoginModel) {
-    return `Hello ${request.username}`;
+    return {
+      data: `Hello ${request.username}`
+    };
   }
 
   //
