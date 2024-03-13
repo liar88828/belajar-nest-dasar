@@ -1,10 +1,24 @@
-import { Controller, Get, Header, HttpCode, Inject, Param, Post, Query, Redirect, Req, Res } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Header,
+  HttpCode,
+  Inject,
+  Param,
+  Post,
+  Query,
+  Redirect,
+  Req,
+  Res
+} from "@nestjs/common";
 import { Request, Response } from "express";
 import { UserService } from "./user.service";
 import { Connection } from "../connection/connection";
 import { MailService } from "../mail/mail.service";
 import { UserRepository } from "../user-repository/user-repository";
 import { MemberService } from "../member/member.service";
+import { User } from "@prisma/client";
 
 // untuk mengubah route
 @Controller("api/users")
@@ -19,6 +33,15 @@ export class UserController {
   ) {
   }
 
+
+  @Post("/create")
+  @Header("Content-Type", "application/json")
+  async save(@Body() data: { firstName: string, lastName?: string }): Promise<User> {
+
+    return this.userRepository.save(data.firstName, data.lastName);
+  }
+
+
   // tidak rekomendasi
   // @Inject()
   // @Optional()
@@ -28,7 +51,7 @@ export class UserController {
   @Get("/connection")
   async getConnection(): Promise<string> {
     this.mailService.send();
-    this.userRepository.save();
+    // this.userRepository.save();
     this.emailService.send();
 
     console.info(this.memberService.getConnection());

@@ -14,3 +14,11 @@ GET localhost:3000/api/users/redirect
 GET localhost:3000/api/users/hola
 ####
 GET localhost:3000/api/users/connection
+####
+POST localhost:3000/api/users/create
+content-type:application/json
+
+{
+  "firstName": "alif",
+  "lastName": "Hermawan"
+}

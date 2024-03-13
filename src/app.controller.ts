@@ -4,8 +4,9 @@ import { UserService } from "./user/user/user.service";
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService,
-              private userService: UserService
+  constructor(
+    private readonly appService: AppService,
+    private userService: UserService
   ) {
   }
 
