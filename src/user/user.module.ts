@@ -4,6 +4,7 @@ import { UserService } from "./user/user.service";
 import { Connection, MongoDBConnection, MySQLConnection } from "./connection/connection";
 import { MailService, mailServiceProvide } from "./mail/mail.service";
 import { createUserRepository, UserRepository } from "./user-repository/user-repository";
+import { MemberService } from './member/member.service';
 
 @Module({
   controllers: [UserController],
@@ -30,7 +31,8 @@ import { createUserRepository, UserRepository } from "./user-repository/user-rep
     {
       provide: "EmailService",
       useExisting: MailService
-    }
+    },
+    MemberService
   ]
 })
 export class UserModule {
