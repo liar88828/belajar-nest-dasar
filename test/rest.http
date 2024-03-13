@@ -19,6 +19,15 @@ POST localhost:3000/api/users/create
 content-type:application/json
 
 {
-  "firstName": "budi",
+  "firstName": "brian",
+  "lastName": "prayetno"
+}
+
+### error
+POST localhost:3000/api/users/create
+content-type:application/json
+
+{
+  "firstName": null,
   "lastName": "prayetno"
 }

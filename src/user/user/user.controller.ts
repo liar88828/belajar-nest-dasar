@@ -4,13 +4,15 @@ import {
   Get,
   Header,
   HttpCode,
+  HttpException,
   Inject,
   Param,
   Post,
   Query,
   Redirect,
   Req,
-  Res, UseFilters
+  Res,
+  UseFilters
 } from "@nestjs/common";
 import { Request, Response } from "express";
 import { UserService } from "./user.service";
@@ -38,6 +40,12 @@ export class UserController {
   @Post("/create")
   @Header("Content-Type", "application/json")
   async save(@Body() data: { firstName: string, lastName?: string }): Promise<User> {
+    if (!data.firstName) throw new HttpException(
+      {
+        code: 400,
+        errors: "First Name is required"
+      },
+      400);
 
     return this.userRepository.save(data.firstName, data.lastName);
   }
@@ -142,7 +150,7 @@ export class UserController {
 
   @Get("/:id")
   getById(
-    @Param("id") id: Request
+    @Param("id") id: string
   ): string {
     return `GET ${id}`;
   }
