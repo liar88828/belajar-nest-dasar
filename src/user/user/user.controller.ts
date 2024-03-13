@@ -69,7 +69,7 @@ export class UserController {
   }
 
   @Get("/sayHello2")
-  @UseFilters(ValidationFilter)
+  // @UseFilters(ValidationFilter)
   async sayHello2(
     @Query("name") name: string
   ): Promise<string> {
