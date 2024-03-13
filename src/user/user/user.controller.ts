@@ -13,7 +13,8 @@ import {
   Redirect,
   Req,
   Res,
-  UseFilters
+  UseFilters,
+  UsePipes
 } from "@nestjs/common";
 import { Request, Response } from "express";
 import { UserService } from "./user.service";
@@ -39,13 +40,23 @@ export class UserController {
   ) {
   }
 
-
   @UseFilters(ValidationFilter)
+  @UsePipes(new ValidationPipe(loginUserRequestValidation))
   @Post("/login")
   @Header("Content-Type", "application/json")
-  async login(@Body(new ValidationPipe(loginUserRequestValidation)) request: LoginModel) {
+  async login(
+    @Query("name") name: string,
+    @Body() request: LoginModel) {
     return `Hello ${request.username}`;
   }
+
+  //
+  // @UseFilters(ValidationFilter)
+  // @Post("/login")
+  // @Header("Content-Type", "application/json")
+  // async login(@Body(new ValidationPipe(loginUserRequestValidation)) request: LoginModel) {
+  //   return `Hello ${request.username}`;
+  // }
 
   @Post("/create")
   @Header("Content-Type", "application/json")

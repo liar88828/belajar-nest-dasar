@@ -47,10 +47,10 @@ content-type:application/json
 GET localhost:3000/api/users/123123
 
 ####
-POST localhost:3000/api/users/login
+POST localhost:3000/api/users/login?name=contoh
 Content-Type: application/json
 
 {
-  "username": "",
-  "password": ""
+  "username": "Eko",
+  "password": "Kurniawan"
 }
