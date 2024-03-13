@@ -7,12 +7,12 @@ import {
   HttpException,
   Inject,
   Param,
+  ParseIntPipe,
   Post,
   Query,
   Redirect,
   Req,
-  Res,
-  UseFilters
+  Res
 } from "@nestjs/common";
 import { Request, Response } from "express";
 import { UserService } from "./user.service";
@@ -21,7 +21,6 @@ import { MailService } from "../mail/mail.service";
 import { UserRepository } from "../user-repository/user-repository";
 import { MemberService } from "../member/member.service";
 import { User } from "@prisma/client";
-import { ValidationFilter } from "../../validation/validation.filter";
 
 // untuk mengubah route
 @Controller("api/users")
@@ -150,8 +149,9 @@ export class UserController {
 
   @Get("/:id")
   getById(
-    @Param("id") id: string
+    @Param("id", ParseIntPipe) id: number
   ): string {
+    console.log(id * 10);
     return `GET ${id}`;
   }
 
