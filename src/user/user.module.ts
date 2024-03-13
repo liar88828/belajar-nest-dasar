@@ -36,7 +36,8 @@ import { ConfigService } from "@nestjs/config";
       useExisting: MailService
     },
     MemberService
-  ]
+  ],
+  exports:[UserService]
 })
 export class UserModule {
 }
