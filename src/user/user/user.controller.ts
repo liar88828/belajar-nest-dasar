@@ -10,7 +10,7 @@ import {
   Query,
   Redirect,
   Req,
-  Res
+  Res, UseFilters
 } from "@nestjs/common";
 import { Request, Response } from "express";
 import { UserService } from "./user.service";
@@ -19,6 +19,7 @@ import { MailService } from "../mail/mail.service";
 import { UserRepository } from "../user-repository/user-repository";
 import { MemberService } from "../member/member.service";
 import { User } from "@prisma/client";
+import { ValidationFilter } from "../../validation/validation.filter";
 
 // untuk mengubah route
 @Controller("api/users")
@@ -60,6 +61,7 @@ export class UserController {
   }
 
   @Get("/sayHello2")
+  @UseFilters(ValidationFilter)
   async sayHello2(
     @Query("name") name: string
   ): Promise<string> {
