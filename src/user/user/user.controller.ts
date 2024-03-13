@@ -63,7 +63,7 @@ export class UserController {
   async sayHello2(
     @Query("name") name: string
   ): Promise<string> {
-    return this.service.sayHello(name);
+    return this.service.sayHello2(name);
   }
 
   @Get("/view/hello")
