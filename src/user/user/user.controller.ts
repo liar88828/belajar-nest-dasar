@@ -31,8 +31,10 @@ import { ValidationPipe } from "../../validation/validation.pipe";
 import { TimeInterceptor } from "../../time/time.interceptor";
 import { Auth } from "../../auth/auth.decorator";
 import { RoleGuard } from "../../role/role.guard";
+import { Roles } from "../../role/roles.decorator";
 
 // untuk mengubah route
+@UseGuards(RoleGuard)
 @Controller("api/users")
 export class UserController {
   constructor(
@@ -47,7 +49,9 @@ export class UserController {
 
 
   @Get("/current")
-  @UseGuards(new RoleGuard(["admin", "operator"]))
+  // @UseGuards(new RoleGuard(["admin", "operator"]))
+  @UseGuards(RoleGuard)
+  @Roles(["admin", "operator"])
   async current(@Auth() user: User): Promise<Record<string, any>> {
     return { data: `Hello ${user.first_name} and ${user.last_name}` };
   }

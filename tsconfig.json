@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "types": [
+      "reflect-metadata"
+    ],
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
