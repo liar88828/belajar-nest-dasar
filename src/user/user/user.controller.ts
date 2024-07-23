@@ -34,7 +34,7 @@ import { RoleGuard } from "../../role/role.guard";
 import { Roles } from "../../role/roles.decorator";
 
 // untuk mengubah route
-@UseGuards(RoleGuard)
+// @UseGuards(RoleGuard)
 @Controller("api/users")
 export class UserController {
   constructor(
